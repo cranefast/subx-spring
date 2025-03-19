@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: subx
+
+springdoc:
+  packages-to-scan: kr.co.subx.controller
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    display-request-duration: true
+    display-operation-id: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug      # SQL ? ??
+    org.hibernate.orm.jdbc.bind: trace  # Hibernate 6.x?? ???? ? ??
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG

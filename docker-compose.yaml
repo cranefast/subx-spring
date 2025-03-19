@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    container_name: subx-spring
+    working_dir: /app
+    volumes:
+      - ./src:/app/src  # 로컬 코드 변경 사항 반영
+    ports:
+      - "8080:8080"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=local
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
+    driver: bridge
