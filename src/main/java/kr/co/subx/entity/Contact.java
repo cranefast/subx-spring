@@ -32,7 +32,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@DynamicUpdate
 public class Contact {
 
     @Id
@@ -65,10 +64,14 @@ public class Contact {
     @PrePersist
     public void prePersist() {
         if (ObjectUtils.isEmpty(this.status)) {
-            this.status = Status.ACTIVE;
+            setDefaultStatus();
         }
         if (ObjectUtils.isEmpty(this.regDate)) {
             this.regDate = LocalDateTime.now();
         }
+    }
+
+    public void setDefaultStatus() {
+        this.status = Status.ACTIVE;
     }
 }

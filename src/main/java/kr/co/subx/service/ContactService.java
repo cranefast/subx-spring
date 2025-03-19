@@ -1,5 +1,6 @@
 package kr.co.subx.service;
 
+import kr.co.subx.common.enums.Status;
 import kr.co.subx.entity.Contact;
 import kr.co.subx.model.ContactDto;
 import kr.co.subx.repository.ContactRepository;
@@ -20,7 +21,13 @@ public class ContactService {
         if (params.getContactNo() == 0) {
             params.setContactNo(null);
         }
-        Contact data = contactRepository.save(modelMapper.map(params, Contact.class));
+        Contact contact = modelMapper.map(params, Contact.class);
+
+        if (params.getContactNo() != null) {
+            contact.setDefaultStatus();
+        }
+
+        Contact data = contactRepository.save(contact);
         return modelMapper.map(data, ContactDto.class);
     }
 
