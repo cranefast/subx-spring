@@ -2,6 +2,7 @@ package kr.co.subx.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import kr.co.subx.model.ContactDto;
 import kr.co.subx.service.ContactService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/contact")
+@RequestMapping("/api/contact")
 @RequiredArgsConstructor
 @Tag(name = "Contact Api", description = "문의 API ")
 public class ContactController {
@@ -24,7 +25,7 @@ public class ContactController {
 
     @PostMapping
     @Operation(summary = "문의 등록")
-    public ResponseEntity<?> save(@RequestBody ContactDto params) {
+    public ResponseEntity<?> save(@Valid @RequestBody ContactDto params) {
         return ResponseEntity.ok(contactService.save(params));
     }
 

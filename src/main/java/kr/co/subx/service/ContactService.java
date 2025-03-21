@@ -18,7 +18,7 @@ public class ContactService {
     private final ModelMapper modelMapper;
 
     public ContactDto save(ContactDto params) {
-        if (params.getContactNo() == 0) {
+        if (params.getContactNo() == null || params.getContactNo() == 0L) {
             params.setContactNo(null);
         }
         Contact contact = modelMapper.map(params, Contact.class);
@@ -28,9 +28,8 @@ public class ContactService {
         }
 
         Contact data = contactRepository.save(contact);
+        log.info("data {}", data);
         return modelMapper.map(data, ContactDto.class);
     }
-
-
 
 }
