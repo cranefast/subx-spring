@@ -1,6 +1,7 @@
 package kr.co.subx.common.config;
 
 import kr.co.subx.model.ErrorResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -23,7 +24,7 @@ public class ControllerAdvisor {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         BindingResult bindingResult = ex.getBindingResult();
-        return ResponseEntity.unprocessableEntity().body(new ErrorResponse("422", bindingErrorResponse(bindingResult)));
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ErrorResponse("422", bindingErrorResponse(bindingResult)));
     }
 
     /**
@@ -35,7 +36,7 @@ public class ControllerAdvisor {
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ErrorResponse> handleBindException(BindException ex) {
         BindingResult bindingResult = ex.getBindingResult();
-        return ResponseEntity.unprocessableEntity().body(new ErrorResponse("422", bindingErrorResponse(bindingResult)));
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ErrorResponse("422", bindingErrorResponse(bindingResult)));
     }
 
     /**

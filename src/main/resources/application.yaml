@@ -4,18 +4,27 @@ spring:
   application:
     name: subx
 
+server:
+  error:
+    include-stacktrace: never  # 불필요한 에러 스택트레이스 제외
+
 springdoc:
   packages-to-scan: kr.co.subx.controller
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
   swagger-ui:
     path: /swagger-ui.html
     disable-swagger-default-url: true
     display-request-duration: true
     display-operation-id: true
+    enabled: true
 
 logging:
   level:
-    org.hibernate.SQL: debug      # SQL ? ??
-    org.hibernate.orm.jdbc.bind: trace  # Hibernate 6.x?? ???? ? ??
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
     org.springframework.jdbc.core.JdbcTemplate: DEBUG
