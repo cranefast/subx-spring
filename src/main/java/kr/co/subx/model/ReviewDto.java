@@ -3,7 +3,9 @@ package kr.co.subx.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
 import kr.co.subx.common.enums.Status;
+import kr.co.subx.entity.Review;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,12 +25,14 @@ public class ReviewDto {
     private Long reviewNo;
 
     @Schema(description = "회사명")
+    @NotEmpty(message = "회사명")
     private String company;
 
     @Schema(description = "업종")
     private String industry;
 
     @Schema(description = "사업자번호")
+    @NotEmpty(message = "사업자번호")
     private String businessNumber;
 
     @Schema(description = "내용")
@@ -52,5 +56,16 @@ public class ReviewDto {
             this.reviewNo = null;
             this.status = Status.ACTIVE;
         }
+    }
+
+    public ReviewDto(Review review) {
+        this.reviewNo = review.getReviewNo();
+        this.company = review.getCompany();
+        this.industry = review.getIndustry();
+        this.businessNumber = review.getBusinessNumber();
+        this.message = review.getMessage();
+        this.status = review.getStatus();
+        this.regDate = review.getRegDate();
+        this.uptDate = review.getUptDate();
     }
 }

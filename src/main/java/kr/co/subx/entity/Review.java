@@ -50,7 +50,7 @@ public class Review {
     @Comment("업종")
     private String industry;
 
-    @Column(name = "business_number", length = 128)
+    @Column(name = "business_number", length = 64)
     @Comment("사업자번호")
     private String businessNumber;
 
